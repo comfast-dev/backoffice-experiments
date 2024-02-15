@@ -1,11 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace e2e_tests.Infra;
+namespace UiTests.Lib.Infra;
 
-public static class DriverSessionStore {
-    const string Separator = "#";
-    static readonly TempFile SessionTempFile = new("WebDriverSessionInfo.txt");
+public static class DriverSessionStore
+{
+    private const string Separator = "#";
+    private static readonly TempFile SessionTempFile = new("WebDriverSessionInfo.txt");
 
     // ReSharper disable once MemberCanBePrivate.Global
     public static void StoreSessionInfo(WebDriver driver) {
@@ -29,7 +30,7 @@ public static class DriverSessionStore {
             var recreatedDriver = new RemoteWebDriver(
                 new FixedSessionExecutor(sessionInfo[0], sessionInfo[1]),
                 new RemoteSessionSettings());
-            
+
             recreatedDriver.FindElements(By.CssSelector("html"));
             return recreatedDriver;
         }
@@ -41,12 +42,14 @@ public static class DriverSessionStore {
     }
 }
 
-class FixedSessionExecutor : HttpCommandExecutor {
+internal class FixedSessionExecutor : HttpCommandExecutor
+{
     private readonly string _sessionId;
+
     public FixedSessionExecutor(string uri, string sessionId) : base(new Uri(uri), TimeSpan.FromSeconds(60)) {
         _sessionId = sessionId;
     }
-    
+
     public override Response Execute(Command command) {
         return command.Name == DriverCommand.NewSession
             ? MockNewSession()
@@ -54,7 +57,7 @@ class FixedSessionExecutor : HttpCommandExecutor {
     }
 
     private Response MockNewSession() {
-        var response = new Response() {
+        var response = new Response {
             SessionId = _sessionId,
             Status = WebDriverResult.Success,
             Value = new Dictionary<string, object>()

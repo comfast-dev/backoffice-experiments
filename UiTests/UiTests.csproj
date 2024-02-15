@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>UiTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,16 +13,14 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0"/>
-        <PackageReference Include="NSelene" Version="1.0.0-alpha13" />
         <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57"/>
-        <PackageReference Include="SpecFlow.xUnit" Version="3.9.22"/>
-        <PackageReference Include="SwiftExcel" Version="1.1.3" />
-        <PackageReference Include="xunit" Version="2.4.1"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="SpecFlow.NUnit" Version="3.9.22"/>
+        <PackageReference Include="nunit" Version="3.13.2"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="4.1.0"/>
         <PackageReference Include="FluentAssertions" Version="6.2.0"/>
+
+        <PackageReference Include="SwiftExcel" Version="1.1.3"/>
+        <PackageReference Include="NSelene" Version="1.0.0-alpha13"/>
     </ItemGroup>
 
 </Project>

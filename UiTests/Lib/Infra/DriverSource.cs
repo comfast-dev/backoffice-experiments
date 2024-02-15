@@ -1,16 +1,17 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace e2e_tests.Infra;
+namespace UiTests.Lib.Infra;
 
 /**
  * Return one Driver instance per thread
  */
-public class DriverSource {
+public class DriverSource
+{
     private static readonly Config _config = new();
     private static readonly ThreadLocal<WebDriver> Instances = new(ProvideDriverInstance);
     public static WebDriver Driver => GetDriver();
-    
+
     /**
      * Provide WebDriver Instance.
      * One per thread.
@@ -19,12 +20,12 @@ public class DriverSource {
     public static WebDriver GetDriver() {
         return Instances.Value;
     }
-    
+
     private static WebDriver ProvideDriverInstance() {
         var driver = _config.Reconnect && !_config.AutoClose
             ? DriverSessionStore.RestoreSessionOrElse(runNewDriver)
             : runNewDriver();
-        
+
         if (_config.AutoClose) addShutdownHook(driver);
 
         return driver;
@@ -44,7 +45,7 @@ public class DriverSource {
      * Run new WebDriver instance
      */
     private static ChromeDriver runNewDriver() {
-         return new ChromeDriver(_config.DriverPath, new ChromeOptions() {
+        return new ChromeDriver(_config.DriverPath, new ChromeOptions {
             BinaryLocation = _config.BrowserPath
         });
     }

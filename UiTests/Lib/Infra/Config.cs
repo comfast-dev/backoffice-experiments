@@ -1,9 +1,10 @@
-﻿namespace e2e_tests.Infra;
+﻿namespace UiTests.Lib.Infra;
 
 /**
  * Todo extract values from JSON / Env variables
  */
-public class Config {
+public class Config
+{
     public readonly bool Reconnect = true;
     public readonly bool AutoClose = false;
     public readonly string BrowserPath = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";

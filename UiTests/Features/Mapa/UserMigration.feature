@@ -6,6 +6,7 @@ Background:
   Given I am logged into Mapa
   And I navigate to "User Migration Waves" page
 
+
 @SMBO-121018
 Scenario Outline: TC1: Upload incorrectly structured excel file
   When I Click Upload Wave with file: "<filename>"
@@ -17,6 +18,7 @@ Scenario Outline: TC1: Upload incorrectly structured excel file
     | TC1.3    | Column layout is not valid : Column with index=1 | upload page    |
     | TC1.2    | File does not contain any data row               | result page    |
     | TC1.4    | File NOT valid                                   | result page    |
+
 
 @SMBO-121020
 Scenario Outline: TC2: Upload correctly structured excel file
@@ -73,6 +75,8 @@ Scenario: TC3.3: Merchant with API user
 
 
 #//todo
+
+
 @SMBO-126730
 Scenario: TC3.4: Subscribed and inactive merchants
   When I Click Upload Wave with file: "TC3.4"
@@ -108,11 +112,12 @@ Scenario: TC3.6: Active merchant with multiple users
   When I click Process and refresh list
   Then Migration details should show 8 results with status "Valid and Finished"
 
+
 @SMBO-126813
 Scenario: TC3.6: Validate in User Manager
   Given previous test @SMBO-126735 is done
   Given I log in User Manager Application as Admin
   When I navigate Manage Team
   And I select "mapaE2EMerchantOITIsBigestName" account
-  
+
   Then There should be 6 entries in User Manager

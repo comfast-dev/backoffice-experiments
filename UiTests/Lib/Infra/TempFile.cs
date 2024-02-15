@@ -1,6 +1,7 @@
-﻿namespace e2e_tests.Infra;
+﻿namespace UiTests.Lib.Infra;
 
-public class TempFile {
+public class TempFile
+{
     private readonly string path;
 
     public TempFile(string name) {
@@ -8,13 +9,13 @@ public class TempFile {
     }
 
     public void save(string content) {
-        using(StreamWriter sw = new StreamWriter(path)) {
+        using (var sw = new StreamWriter(path)) {
             sw.Write(content);
         }
     }
-    
+
     public string read() {
-        using(StreamReader sr = new StreamReader(path)) {
+        using (var sr = new StreamReader(path)) {
             return sr.ReadToEnd();
         }
     }
