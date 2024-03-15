@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>UiTests</RootNamespace>
@@ -17,10 +17,9 @@
         <PackageReference Include="SpecFlow.NUnit" Version="3.9.22"/>
         <PackageReference Include="nunit" Version="3.13.2"/>
         <PackageReference Include="NUnit3TestAdapter" Version="4.1.0"/>
-        <PackageReference Include="FluentAssertions" Version="6.2.0"/>
+<!--        <PackageReference Include="FluentAssertions" Version="6.2.0"/>-->
 
-        <PackageReference Include="SwiftExcel" Version="1.1.3"/>
+<!--        <PackageReference Include="SwiftExcel" Version="1.1.3"/>-->
         <PackageReference Include="NSelene" Version="1.0.0-alpha13"/>
     </ItemGroup>
-
 </Project>
