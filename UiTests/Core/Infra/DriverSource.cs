@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using UiTests.Lib.Comfast;
 
 namespace UiTests.Lib.Infra;
 
@@ -8,7 +9,7 @@ namespace UiTests.Lib.Infra;
  */
 public class DriverSource
 {
-    private static readonly Config _config = new();
+    private static readonly DriverConfig _config = new();
     private static readonly ThreadLocal<WebDriver> Instances = new(ProvideDriverInstance);
     public static WebDriver Driver => GetDriver();
 

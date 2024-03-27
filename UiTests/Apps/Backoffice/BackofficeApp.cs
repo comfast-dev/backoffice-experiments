@@ -1,34 +1,36 @@
 ﻿using UiTests.Apps.Backoffice.Components.Table;
 using UiTests.Data;
-using UiTests.Data.Model;
 using UiTests.Lib.Comfast;
+using UiTests.Pages.Backoffice;
 using UiTests.Pages.Backoffice.Components;
 using UiTests.Pages.Backoffice.Components.Menu;
 
-namespace UiTests.Pages.Backoffice;
+namespace UiTests.Apps.Backoffice;
 
 public class BackofficeApp {
-    private readonly BoEnvData _config;
+    private readonly BackofficeConfig _config;
+    
     public readonly FormService FormService = new();
     public readonly LoginPage LoginPage;
 
-    public BackofficeApp(Env env) {
-        _config = ConfigData.getConfig(env);
-        LoginPage = new LoginPage(_config);
+    public BackofficeApp(BackofficeConfig config) {
+        _config = config;
+        LoginPage = new LoginPage(config);
     }
 
-    public void LogIn() {
+    public void LogInAsMerchant() {
+        var user = _config.MerchantUser;
+        LoginPage.LogInAs(user.Username, user.Password, UserType.AbsysUser);
+    }
+    
+    public void LogInAsAbsys() {
         var user = _config.AbsysUser;
         LoginPage.LogInAs(user.Username, user.Password, UserType.AbsysUser);
     }
     
-    public void LogInAs(string user, string password) {
-        LoginPage.LogInAs(user, password, UserType.AbsysUser);
-    }
-
     public void NavigateTo(string menuLvl1, string? menuLvl2 = null, string? menuLvl3 = null, string? menuLvl4 = null) {
         new MenuLvl1(menuLvl1).Open();
-        if (menuLvl3 != null) new MenuLvl2(menuLvl2).Open();
+        if (menuLvl2 != null) new MenuLvl2(menuLvl2).Open();
         if (menuLvl3 != null) new MenuLvl3(menuLvl3).Open();
         if (menuLvl4 != null) new MenuLvl4(menuLvl4).Open();
         waitForLoadEnd();
@@ -72,7 +74,8 @@ public class FormService {
         new Submit().Click();
     }
 
-    private Input recognizeInputType(string label) {
-        return new Input(label);
+    private LabeledInput recognizeInputType(string label) {
+        //todo recognize Select, Checkbox etc.
+        return new LabeledInput(label);
     }
 }

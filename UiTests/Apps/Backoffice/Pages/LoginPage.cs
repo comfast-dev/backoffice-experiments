@@ -1,5 +1,4 @@
 ﻿using UiTests.Data;
-using UiTests.Data.Model;
 using UiTests.Lib.Comfast;
 using UiTests.Pages.Backoffice.Components;
 
@@ -8,10 +7,10 @@ namespace UiTests.Pages.Backoffice;
 public class LoginPage {
     public const string LoginUrl = "/Ncol/Test/Backoffice/login/index";
 
-    Input UserIdInput = new("User ID");
-    Input PSPIDInput = new("PSPID");
-    Input PSPIDOptional = new("PSPID (Optional)");
-    Input Passwordinput = new("Password");
+    LabeledInput UserIdInput = new("User ID");
+    LabeledInput PSPIDInput = new("PSPID");
+    LabeledInput PSPIDOptional = new("PSPID (Optional)");
+    LabeledInput Passwordinput = new("Password");
     Button SubmitBtn = new("Submit");
     LinkEl loginAsUser = new("Login as user");
     LinkEl loginAsPSPID = new("Login as PSPID");
@@ -22,8 +21,8 @@ public class LoginPage {
     CfLocator LoginForm = new("//div[@class='login-title bold'][./span/.='Login']", "Login form");
     private CfLocator LoginErrorMsg = new("#errorMessage", "Login Error msg");
     
-    private BoEnvData _config;
-    public LoginPage(BoEnvData config) {
+    private BackofficeConfig _config;
+    public LoginPage(BackofficeConfig config) {
         _config = config;
     }
 

@@ -1,4 +1,5 @@
-﻿using UiTests.Lib;
+﻿using System;
+using UiTests.Lib;
 using UiTests.Lib.Comfast;
 
 namespace UiTests.Pages.Backoffice.Components;

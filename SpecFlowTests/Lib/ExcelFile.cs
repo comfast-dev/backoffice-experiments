@@ -1,4 +1,5 @@
 ﻿using SwiftExcel;
+using TechTalk.SpecFlow;
 
 namespace UiTests.Lib;
 
@@ -6,8 +7,11 @@ public class ExcelFile
 {
     public readonly string Path;
 
-    public ExcelFile(string name, Table table) {
-        Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "bdd_tests", name);
+    /**
+     * Get Gherkin table and save it in Excel file
+     */
+    public ExcelFile(string fileName, Table table) {
+        Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "bdd_tests", fileName);
 
         using (var ew = new ExcelWriter(Path)) {
             var headers = table.Header.ToList();

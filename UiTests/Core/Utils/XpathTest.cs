@@ -9,8 +9,8 @@ public class XpathTest {
 
     [Test]
     public void EscapeTextTest() {
-        Assert.AreEqual("concat('\"That', \"'\", 's mine\", he said.')", 
-            Xpath.EscapeText("\"That's mine\", he said."));
+        Assert.AreEqual("concat('It', \"'\", 's \"hard\" text to match')", 
+            Xpath.EscapeText("It's \"hard\" text to match"));
         
         Assert.AreEqual("'Some text'", 
             Xpath.EscapeText("Some text"));

@@ -1,4 +1,5 @@
-﻿using UiTests.Lib;
+﻿using TechTalk.SpecFlow;
+using UiTests.Lib;
 
 namespace UiTests.Steps;
 
@@ -10,7 +11,7 @@ public sealed class MapaSteps
 
     [Given(@"I am logged into Mapa")]
     public void GivenIAmLoggedInMapa() {
-        mapaNav.LogIn("pku", "lol");
+        mapaNav.LogIn("pku", "PUT PASSWORD HERE");
     }
 
     [Given(@"I navigate to ""(.*)"" page")]
@@ -20,13 +21,8 @@ public sealed class MapaSteps
 
     [When(@"I Click Upload Wave with file: ""(.*)""")]
     public void WhenIClickUploadWaveWithFile(string p0) {
-        mapaNav.NavigateToLink(S("//a[text()='Upload wave']"));
+        mapaNav.NavigateToLink(NSelene.Selene.S("//a[text()='Upload wave']"));
     }
-
-    // [When(@"Click /Upload Wave/ with file: ""(.*)""")]
-    // public void WhenClickUploadWaveWithFile(string p0) {
-    //     ScenarioContext.StepIsPending();
-    // }
 
     [Then("Mapa (upload|result) page error should be shown: \".*\"")]
     public void mapaErrorShouldBeShow(string errorMessage) {
@@ -51,6 +47,6 @@ public sealed class MapaSteps
     public void WhenIClickUploadWaveAndAttachFile(string fileName, Table table) {
         var path = new ExcelFile(fileName, table).Path;
 
-        S("input[type=file]").SendKeys(path).Click();
+        NSelene.Selene.S("input[type=file]").SendKeys(path).Click();
     }
 }

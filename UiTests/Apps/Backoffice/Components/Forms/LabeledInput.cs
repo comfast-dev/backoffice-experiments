@@ -4,7 +4,7 @@ using UiTests.Lib.Comfast;
 
 namespace UiTests.Pages.Backoffice.Components;
 
-public class Input(string label) : LabeledComponent(
+public class LabeledInput(string label) : LabeledComponent(
     $"//label[.={Xpath.EscapeText(label)}]/../following-sibling::*//input", $"Input: '{label}'"), 
     IAnyInput {
     

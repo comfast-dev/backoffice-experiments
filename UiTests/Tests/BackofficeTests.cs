@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
+using UiTests.Apps.Backoffice;
 using UiTests.Data;
-using UiTests.Data.Model;
 using UiTests.Pages.Backoffice;
 using UiTests.Pages.Backoffice.Components;
 using UiTests.Pages.Backoffice.Components.Menu;
@@ -9,13 +9,19 @@ namespace UiTests.Tests;
 
 public class BackofficeTests
 {
-    private readonly BackofficeApp _backoffice = new(Env.Test);
-    private readonly BoEnvData _config = ConfigData.getConfig(Env.Test);
+    static readonly Dictionary<Env, BackofficeConfig> _backofficeData = new() {
+        { Env.Dev, new BackofficeConfig { BaseUrl = "not yet", AbsysUser = new User("", "") } },
+        { Env.Int, new BackofficeConfig { BaseUrl = "not yet", AbsysUser = new User("", "") } },
+        { Env.Test, new BackofficeConfig { BaseUrl = "https://secure.ogone.com/Ncol/Test/Backoffice", AbsysUser = new User("pku", "aaa") } },
+        { Env.Prod, new BackofficeConfig { BaseUrl = "not yet", AbsysUser = new User("", "") } },
+    };
+    
+    private readonly BackofficeApp _backoffice = new(_backofficeData[Env.Test]);
 
     [Test] public void backoffice_login() {
-        _backoffice.LogIn();
+        _backoffice.LogInAsAbsys();
         
-        Console.WriteLine(String.Join("\n", new Input("").RecognizeElements()));
+        Console.WriteLine(String.Join("\n", new LabeledInput("").RecognizeElements()));
         Console.WriteLine(String.Join("\n", new LinkEl("").RecognizeElements()));
     }
 
@@ -25,11 +31,11 @@ public class BackofficeTests
     }
 
     [Test] public void impersonate() {
-        _backoffice.LogIn();
+        _backoffice.LogInAsAbsys();
         
         _backoffice.NavigateTo("Other merchant");
 
-        var merchant = "pklTestMerchant3";
+        var merchant = "pklTestCompany2";
         
         _backoffice.FillForm(new Dictionary<string, string>() {
             { "PSPID", merchant },

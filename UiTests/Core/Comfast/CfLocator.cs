@@ -1,5 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using UiTests.Lib.Infra;
 
@@ -26,7 +30,18 @@ public class CfLocator {
     public void Click() {
         Find().Click();
     }
+    
+    public void Fill(string text) {
+        var el = Find();
+        el.Clear();
+        el.SendKeys(text);
+        Assert.AreEqual(text, el.GetAttribute("value"));
+    }
 
+    public string GetAttribute(string name) {
+        return Find().GetAttribute(name);
+    }
+    
     public void ShouldAppear(int? timeoutMs = null) {
         WaitUtils.WaitFor(() => IsDisplayed, "appear element: " + _description, timeoutMs);
     }

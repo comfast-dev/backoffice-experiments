@@ -1,10 +1,8 @@
-﻿namespace UiTests.Lib.Infra;
+﻿namespace UiTests.Lib.Comfast;
 
-/**
- * Todo extract values from JSON / Env variables
- */
-public class Config
-{
+public class DriverConfig {
+    public static string BrowserName = "chrome";
+    public static int TimeoutMs = 10000;
     public readonly bool Reconnect = true;
     public readonly bool AutoClose = false;
     public readonly string BrowserPath = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
